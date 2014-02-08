@@ -1,8 +1,8 @@
 <?php
+	require_once 'includes\user.php';
+	
 	session_start();
 	
-	require_once 'includes\user.php';
-
 	if(!(isset($_SESSION["login"]) && $_SESSION["login"] != '')){
 		header("Location: login.php");
 	}
@@ -24,6 +24,14 @@
 			<script type="text/javascript" src="static/js/bootstrap-modal.js"></script>
 			<script type="text/javascript" src="static/js/bootstrap-transition.js"></script>
 			<script type="text/javascript" src="static/js/jquery-2.1.0.min.js"></script>
+			<script type="text/javascript" src="static/ckeditor/ckeditor.js"></script>
+			
+			<script>
+				function showEditor() {
+					$("#post-form").show();
+				}
+			</script>
+			
 			<title>Dashboard</title>
 		</head>
 		<body>
@@ -36,6 +44,18 @@
 				  </ul>
 				</div> 
 			</div>
+			<p><a href="javascript:showEditor();" class="btn btn-primary" id="new-post">New Post</a></p>
+			<form id="post-form" method="post" style="display: none;">
+				<p>
+					<textarea id="editor1" name="editor1">&lt;p&gt;Write something...&lt;/p&gt;</textarea>
+					<script type="text/javascript">
+						CKEDITOR.replace( 'editor1' );
+					</script>
+				</p>
+				<p>
+					<input type="submit" />
+				</p>
+			</form>
 			<form id="logout-form" action="dashboard.php" method="post"> 
 				<button class="btn btn-primary" type="submit" name="logout">Log Out</button>
 			</form>
