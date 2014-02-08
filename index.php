@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 	<html lang="en">
 		<head>
@@ -21,7 +24,7 @@
 					<li class="active"><a href="index.php">Home</a></li>
 					<li>
 						<?php 
-							if(!isset($_SESSION["login"])) {
+							if(!(isset($_SESSION["login"]) && $_SESSION["login"] != '')) {
 								echo '<a href="login.php">Login/Signup</a>';
 							}
 							else {

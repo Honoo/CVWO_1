@@ -39,7 +39,6 @@
 	}
 	
 	function signUp(){
-	
 		// Connect to the database
 		$db_found = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 		
@@ -81,5 +80,8 @@
 	}
 	
 	function logOut(){
+		session_start();
+		session_destroy();
+		header("Location: index.php");
 	}
 ?>

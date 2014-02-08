@@ -1,3 +1,16 @@
+<?php
+	session_start();
+	
+	require_once 'includes\user.php';
+
+	if(!(isset($_SESSION["login"]) && $_SESSION["login"] != '')){
+		header("Location: login.php");
+	}
+	
+	if(isset($_POST["logout"])){
+		logOut();
+	}
+?>
 <!DOCTYPE html>
 	<html lang="en">
 		<head>
@@ -11,10 +24,21 @@
 			<script type="text/javascript" src="static/js/bootstrap-modal.js"></script>
 			<script type="text/javascript" src="static/js/bootstrap-transition.js"></script>
 			<script type="text/javascript" src="static/js/jquery-2.1.0.min.js"></script>
-			<script type="text/javascript" src="static/js/jquery.md5.js"></script>
 			<title>Dashboard</title>
 		</head>
 		<body>
-		Hello
+		<div class="container-fluid">
+			<div class="navbar">
+				<div class="tabbable">
+				  <ul class="nav nav-tabs">
+					<li><a href="index.php">Home</a></li>
+					<li class="active"><a href="dashboard.php">Dashboard</a></li>
+				  </ul>
+				</div> 
+			</div>
+			<form id="logout-form" action="dashboard.php" method="post"> 
+				<button class="btn btn-primary" type="submit" name="logout">Log Out</button>
+			</form>
+		</div>
 		</body>
 	</html>
