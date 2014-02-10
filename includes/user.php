@@ -1,4 +1,5 @@
 <?php
+	// This file stores functions related to user actions.
 
 	require_once 'includes\config.php';
 	
@@ -20,9 +21,15 @@
 		}
 		else {
 			// Check if the login details are correct
-			$SQL = "SELECT * FROM users WHERE username = '$uname' AND password = '$pword';";
-			$result = mysqli_query($db_found,$SQL);
-			$num_rows = mysqli_num_rows($result);
+			
+			// Prepare and execute the SQL query
+			$SQL = "SELECT username FROM users WHERE username=? AND password=?;";
+			$stmt = mysqli_prepare($db_found,$SQL);
+			mysqli_stmt_bind_param($stmt,"ss",$uname,$pword);
+			mysqli_stmt_execute($stmt);
+			mysqli_stmt_bind_result($stmt, $result);
+			mysqli_stmt_fetch($stmt);
+			$num_rows = sizeof($result);
 
 			if($num_rows > 0){
 				mysqli_close($db_found);
@@ -57,9 +64,13 @@
 		}
 		else {
 			// Check that the username isn't taken yet
-			$SQL = "SELECT * FROM users WHERE username = '$uname';";
-			$result = mysqli_query($db_found,$SQL);
-			$num_rows = mysqli_num_rows($result);
+			$SQL = "SELECT username FROM users WHERE username=?;";
+			$stmt = mysqli_prepare($db_found,$SQL);
+			mysqli_stmt_bind_param($stmt,"s",$uname);
+			mysqli_stmt_execute($stmt);
+			mysqli_stmt_bind_result($stmt, $result);
+			mysqli_stmt_fetch($stmt);
+			$num_rows = sizeof($result);
 
 			if ($num_rows > 0) {
 				echo("Username already taken");
@@ -67,8 +78,10 @@
 			}
 			else {
 				// Complete signup
-				$SQL = "INSERT INTO users (username, email, password) VALUES ('$uname', '$email', '$pword');";
-				$result = mysqli_query($db_found,$SQL);
+				$SQL = "INSERT INTO users (username, email, password) VALUES (?, ?, ?);";
+				$stmt = mysqli_prepare($db_found,$SQL);
+				mysqli_stmt_bind_param($stmt,"sss",$uname,$email,$pword);
+				mysqli_stmt_execute($stmt);
 
 				mysqli_close($db_found);
 				
