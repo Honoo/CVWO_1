@@ -36,6 +36,7 @@
 				
 				session_start();
 				$_SESSION["login"] = "1";
+				$_SESSION['username'] = $uname;
 				header ("Location: dashboard.php");
 			}
 			else {
@@ -86,6 +87,7 @@
 				mysqli_close($db_found);
 				
 				session_start();
+				$_SESSION['username'] = $uname;
 				$_SESSION['login'] = "1";
 				header ("Location: dashboard.php");
 			}

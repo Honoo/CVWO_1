@@ -1,10 +1,15 @@
 <?php
 	require_once 'includes\user.php';
+	require_once 'includes\blog.php';
 	
 	session_start();
-	
+		
 	if(!(isset($_SESSION["login"]) && $_SESSION["login"] != '')){
 		header("Location: login.php");
+	}
+	
+	if(isset($_POST['editor1'])){
+		createPost();
 	}
 	
 	if(isset($_POST["logout"])){
@@ -44,8 +49,14 @@
 				  </ul>
 				</div> 
 			</div>
-			<p><a href="javascript:showEditor();" class="btn btn-primary" id="new-post">New Post</a></p>
-			<form id="post-form" method="post" style="display: none;">
+			<!-- Text editor -->
+			<p>
+				<a href="javascript:showEditor();" class="btn btn-primary" id="new-post">New Post</a>
+			</p>
+			<form id="post-form" method="post" action="dashboard.php" style="display:none;">
+				<p>
+					<input type="text" name="title" value="Title" maxlength="50"/>
+				</p>
 				<p>
 					<textarea id="editor1" name="editor1">&lt;p&gt;Write something...&lt;/p&gt;</textarea>
 					<script type="text/javascript">
@@ -56,6 +67,7 @@
 					<input type="submit" />
 				</p>
 			</form>
+			<!-- Logout button -->
 			<form id="logout-form" action="dashboard.php" method="post"> 
 				<button class="btn btn-primary" type="submit" name="logout">Log Out</button>
 			</form>
