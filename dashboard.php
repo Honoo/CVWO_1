@@ -7,11 +7,7 @@
 	if(!(isset($_SESSION["login"]) && $_SESSION["login"] != '')){
 		header("Location: login.php");
 	}
-	
-	if(isset($_POST['editor1'])){
-		createPost();
-	}
-	
+		
 	if(isset($_GET['id'])){
 		deletePost();
 	}
@@ -35,11 +31,7 @@
 			<script type="text/javascript" src="static/js/jquery-2.1.0.min.js"></script>
 			<script type="text/javascript" src="static/ckeditor/ckeditor.js"></script>
 			
-			<script>
-				function showEditor() {
-					$("#post-form").show();
-				}
-				
+			<script>				
 				function showPosts() {
 					$("#postsTable").show();
 				}
@@ -59,22 +51,10 @@
 			</div>
 			<!-- Text editor -->
 			<p>
-				<a href="javascript:showEditor();" class="btn btn-primary" id="new-post">New Post</a>
+				<form id="create-form" method="get" action="post.php">
+					<a href="post.php?type=create" class="btn btn-primary">New Post</a>
+				</form>
 			</p>
-			<form id="post-form" method="post" action="dashboard.php" style="display:none;">
-				<p>
-					<input type="text" name="title" value="Title" maxlength="50"/>
-				</p>
-				<p>
-					<textarea id="editor1" name="editor1">&lt;p&gt;Write something...&lt;/p&gt;</textarea>
-					<script type="text/javascript">
-						CKEDITOR.replace( 'editor1' );
-					</script>
-				</p>
-				<p>
-					<input type="submit" />
-				</p>
-			</form>
 			<!-- List of posts by user -->
 			<a href="javascript:showPosts();" class="btn btn-primary" id="edit-posts">Edit/Delete Posts</a>
 			<p><table id="postsTable" style="display:none;">

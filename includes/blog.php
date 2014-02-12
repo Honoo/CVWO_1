@@ -20,6 +20,8 @@
 		mysqli_stmt_execute($stmt);
 		mysqli_stmt_close($stmt);
 		mysqli_close($db_found);
+		
+		header("Location: dashboard.php");
 	}
 	
 	function listPosts(){
@@ -36,8 +38,8 @@
 			// Display the results in a table
 			echo "<tr><td>$title</td>";
 			echo "<td>$date</td>";
-			echo '<td><a href="javascript:edit();" class="btn btn-primary" id="edit-btn">Edit</a></td>';
-			echo '<td><form id="delete-form" method="get" action="dashboard.php"><a href="dashboard.php?id='.$id.'" class="btn btn-primary">Delete</a></form></td></tr>';	
+			echo '<td><form id="edit-form" method="get" action="post.php"><a href="post.php?type=edit&id='.$id.'" class="btn btn-primary">Edit Post</a></form></td>';
+			echo '<td><form id="delete-form" method="get" action="dashboard.php"><a href="dashboard.php?id='.$id.'" class="btn btn-primary">Delete Post</a></form></td></tr>';	
 		}
 		mysqli_stmt_close($stmt);
 		mysqli_close($db_found);
@@ -60,6 +62,38 @@
 		}
 		mysqli_stmt_close($stmt);
 		mysqli_close($db_found);
+	}
+	
+	function retrievePost(){
+		// Displays a post in the text editor to be edited
+	
+		$db_found = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
+		
+		$SQL = "SELECT content FROM posts WHERE postID = ?;";
+		$stmt = mysqli_prepare($db_found,$SQL);
+		mysqli_stmt_bind_param($stmt,"i",$_GET['id']);
+		mysqli_stmt_execute($stmt);
+		mysqli_stmt_bind_result($stmt,$postContent);
+		mysqli_stmt_fetch($stmt);
+		mysqli_stmt_close($stmt);
+		mysqli_close($db_found);
+		
+		return $postContent;
+	}
+	
+	function editPost(){
+		// Updates an existing post
+		
+		$db_found = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
+		
+		$SQL ="UPDATE posts SET content = ?, title = ? WHERE postID = ?;";
+		$stmt = mysqli_prepare($db_found,$SQL);
+		mysqli_stmt_bind_param($stmt,"ssi",$_POST['editor1'],$_POST['title'],$_SESSION['id']);
+		mysqli_stmt_execute($stmt);
+		mysqli_stmt_close($stmt);
+		mysqli_close($db_found);
+		
+		header("Location: dashboard.php");
 	}
 	
 	function deletePost(){
