@@ -12,6 +12,10 @@
 		createPost();
 	}
 	
+	if(isset($_GET['id'])){
+		deletePost();
+	}
+	
 	if(isset($_POST["logout"])){
 		logOut();
 	}
@@ -34,6 +38,10 @@
 			<script>
 				function showEditor() {
 					$("#post-form").show();
+				}
+				
+				function showPosts() {
+					$("#postsTable").show();
 				}
 			</script>
 			
@@ -67,6 +75,16 @@
 					<input type="submit" />
 				</p>
 			</form>
+			<!-- List of posts by user -->
+			<a href="javascript:showPosts();" class="btn btn-primary" id="edit-posts">Edit/Delete Posts</a>
+			<p><table id="postsTable" style="display:none;">
+				<tr>
+					<td>Post Title</td><td>Date Posted</td>
+				</tr>
+				<?php
+					listPosts();
+				?>
+			</table></p>
 			<!-- Logout button -->
 			<form id="logout-form" action="dashboard.php" method="post"> 
 				<button class="btn btn-primary" type="submit" name="logout">Log Out</button>

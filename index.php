@@ -1,4 +1,6 @@
 <?php
+	require_once 'includes\blog.php';
+
 	session_start();
 ?>
 <!DOCTYPE html>
@@ -34,6 +36,11 @@
 					</li>
 				  </ul>
 				</div> 
+			</div>
+			<div id="posts">
+				<?php
+					displayPosts();
+				?>
 			</div>
 		</div>
 		</body>
