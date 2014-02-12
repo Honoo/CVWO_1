@@ -8,4 +8,4 @@
 <script type="text/javascript" src="static/js/bootstrap-button.js"></script>
 <script type="text/javascript" src="static/js/bootstrap-modal.js"></script>
 <script type="text/javascript" src="static/js/bootstrap-transition.js"></script>
-<script type="text/javascript" src="static/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="static/js/jquery.js"></script>

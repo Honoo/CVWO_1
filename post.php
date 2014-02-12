@@ -52,6 +52,7 @@
 					  </ul>
 					</div> 
 				</div>
+				<!-- text editor -->
 				<form id="post-form" method="post" action="post.php">
 					<p>
 						<input type="text" name="title" value="Title" maxlength="50"/>

@@ -46,7 +46,6 @@
 						?>
 					</div>
 					<div class="marketing"><h1>Log in and sign up here</h1>
-						<!--<p class="marketing-byline">Create a new account or log in if you're already a trainer</p>-->
 					</div>
 					<div class="row-fluid">
 						<!-- login box -->
