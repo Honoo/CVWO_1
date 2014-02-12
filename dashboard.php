@@ -29,7 +29,7 @@
 			
 			<script>				
 				function showPosts() {
-					$("#postsTable").show();
+					$("#tableSection").show();
 				}
 			</script>
 			
@@ -46,6 +46,7 @@
 				</div> 
 			</div>
 			<div id="content" class="row">
+				<!-- sidebar -->
 				<div id="sidebar" class="span2">
 					<ul id="sidebar-list" class="nav nav-list row-padded">
 						<li>
@@ -54,7 +55,7 @@
 							</form>
 						</li>
 						<li>
-							<input type="button btn-primary btn-block" value="Post List" onClick="javascript:showPosts();" class="btn btn-primary" id="edit-posts">
+							<input type="button" value="Post List" onClick="javascript:showPosts();" class="btn btn-primary btn-block" id="edit-posts">
 						</li>
 						<li>
 							<form id="logout-form" action="dashboard.php" method="post"> 
@@ -63,22 +64,26 @@
 						</li>
 					</ul>
 				</div>
+				<!-- main content -->
 				<div id="main" class="span6">
 					<p>
 						<?php echo "Hello, ".$_SESSION['username']."."; ?>
 					</p>
 					<p>
-						<table id="postsTable" class="table table-striped" style="display:none;">
-							<tr>
-								<td><strong>Post Title</strong></td>
-								<td><strong>Date Posted</strong></td>
-								<td><strong>Edit</strong></td>
-								<td><strong>Delete</strong></td>
-							</tr>
-							<?php
-								listPosts($db_found);
-							?>
-						</table>
+						<div id="tableSection">
+							<p>Below is a list of posts by you:</p>
+							<table id="postsTable" class="table table-striped">
+								<tr>
+									<td><strong>Post Title</strong></td>
+									<td><strong>Date Posted</strong></td>
+									<td><strong>Edit</strong></td>
+									<td><strong>Delete</strong></td>
+								</tr>
+								<?php
+									listPosts($db_found);
+								?>
+							</table>
+						</div>
 					</p>
 				</div>
 			</div>
