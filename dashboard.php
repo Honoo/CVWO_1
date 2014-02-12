@@ -1,15 +1,18 @@
 <?php
-	require_once 'includes\user.php';
-	require_once 'includes\blog.php';
-	
 	session_start();
 		
 	if(!(isset($_SESSION["login"]) && $_SESSION["login"] != '')){
 		header("Location: login.php");
 	}
+	
+	require_once 'includes\user.php';
+	require_once 'includes\blog.php';
+	require_once 'includes\config.php';
+	
+	$db_found = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 		
 	if(isset($_GET['id'])){
-		deletePost();
+		deletePost($db_found);
 	}
 	
 	if(isset($_POST["logout"])){
@@ -62,7 +65,7 @@
 					<td>Post Title</td><td>Date Posted</td>
 				</tr>
 				<?php
-					listPosts();
+					listPosts($db_found);
 				?>
 			</table></p>
 			<!-- Logout button -->

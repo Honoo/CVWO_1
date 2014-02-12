@@ -1,7 +1,10 @@
 <?php
 	require_once 'includes\blog.php';
+	require_once 'includes\config.php';
 
 	session_start();
+
+	$db_found = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 ?>
 <!DOCTYPE html>
 	<html lang="en">
@@ -39,7 +42,7 @@
 			</div>
 			<div id="posts">
 				<?php
-					displayPosts();
+					displayPosts($db_found);
 				?>
 			</div>
 		</div>

@@ -6,14 +6,18 @@
 	}
 	
 	require_once 'includes\user.php';
+	require_once 'includes\config.php';
 	
+	$db_found = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 	$errorMessage = '';
 	
-	if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])){
-		$errorMessage = validateLogin();
-	}
-	elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['signup'])){
-		$errorMessage = signUp();
+	if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+		if(isset($_POST['login'])){
+			$errorMessage = validateLogin($db_found);
+		}
+		elseif(isset($_POST['signup'])){
+			$errorMessage = signUp($db_found);
+		}		
 	}
 ?>
 <!DOCTYPE html>

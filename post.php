@@ -1,12 +1,14 @@
 <?php
-	require_once 'includes\user.php';
-	require_once 'includes\blog.php';
-
 	session_start();
 	
 	if(!(isset($_SESSION["login"]) && $_SESSION["login"] != '')){
 		header("Location: login.php");
 	}	
+	
+	require_once 'includes\blog.php';
+	require_once 'includes\config.php';
+	
+	$db_found = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 	
 	if(isset($_GET['type'])){
 		if($_GET['type'] == "create"){
@@ -15,16 +17,16 @@
 		elseif($_GET['type'] == "edit"){
 			$_SESSION['type'] = "edit";
 			$_SESSION['id'] = $_GET['id'];
-			$postContent = retrievePost();
+			$postContent = retrievePost($db_found);
 		}
 	}
 	
 	if(isset($_POST['editor1'])){
 		if($_SESSION['type'] == "create"){
-			createPost();
+			createPost($db_found);
 		}
 		else{
-			editPost();
+			editPost($db_found);
 		}
 		$_SESSION['type'] == "";
 		$_SESSION['id'] == "";
