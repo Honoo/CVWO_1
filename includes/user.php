@@ -12,11 +12,11 @@
 		$pword = md5($uname.$pwordraw);
 		
 		if(!$db_found){
-			echo("Can't connect to the database");	
+			$errorMessage = "Can't connect to the database.";	
 			mysqli_close($db_found);
 		}
 		elseif(strlen($uname) > 20 || strlen($pwordraw) > 20){
-			echo("Input too large. Username and password are a maximum of 20 characters each.");
+			$errorMessage = "Input too large. Username and password are a maximum of 20 characters each.";
 			mysqli_close($db_found);
 		}
 		else {
@@ -37,13 +37,16 @@
 				session_start();
 				$_SESSION["login"] = "1";
 				$_SESSION['username'] = $uname;
+				$errorMessage = '';
 				header ("Location: dashboard.php");
 			}
 			else {
-				echo("Invalid login. Please try again.");
+				$errorMessage = "Invalid login. Please try again.";
 				mysqli_close($db_found);
 			}
 		}
+		
+		return $errorMessage;
 	}
 	
 	function signUp(){
@@ -56,11 +59,11 @@
 		$email = mysqli_real_escape_string($db_found, $_POST['email']);
 						
 		if(!$db_found){
-			echo("Can't connect to the database");	
+			$errorMessage = "Can't connect to the database.";	
 			mysqli_close($db_found);
 		}
 		elseif(strlen($uname) > 20 || strlen($pwordraw) > 20 || strlen($email) > 30){
-			echo("Input too large. Username and password are a maximum of 20 characters each while email is a maximum of 30 characters.");
+			$errorMessage = "Input too large. Username and password are a maximum of 20 characters each while email is a maximum of 30 characters.";
 			mysqli_close($db_found);
 		}
 		else {
@@ -74,7 +77,7 @@
 			$num_rows = sizeof($result);
 
 			if ($num_rows > 0) {
-				echo("Username already taken");
+				$errorMessage = "Username already taken. Please try again.";
 				mysqli_close($db_found);
 			}
 			else {
@@ -89,9 +92,12 @@
 				session_start();
 				$_SESSION['username'] = $uname;
 				$_SESSION['login'] = "1";
+				$errorMessage = '';
 				header ("Location: dashboard.php");
 			}
 		}
+		
+		return $errorMessage;
 	}
 	
 	function logOut(){

@@ -7,11 +7,13 @@
 	
 	require_once 'includes\user.php';
 	
+	$errorMessage = '';
+	
 	if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])){
-		validateLogin();
+		$errorMessage = validateLogin();
 	}
 	elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['signup'])){
-		signUp();
+		$errorMessage = signUp();
 	}
 ?>
 <!DOCTYPE html>
@@ -41,6 +43,11 @@
 					</div> 
 				</div>
 				<div class="container">
+					<div id="error">
+						<?php
+							echo $errorMessage;
+						?>
+					</div>
 					<div class="marketing"><h1>Log in and sign up here</h1>
 						<!--<p class="marketing-byline">Create a new account or log in if you're already a trainer</p>-->
 					</div>
