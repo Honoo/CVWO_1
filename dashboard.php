@@ -22,17 +22,9 @@
 <!DOCTYPE html>
 	<html lang="en">
 		<head>
-			<meta charset="utf-8">
-			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link href="static/css/bootstrap.min.css" rel="stylesheet">
-			<link href="static/css/bootstrap-responsive.min.css" rel="stylesheet">
-			<link href="static/css/style.css" rel="stylesheet">
-			<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
-			<script type="text/javascript" src="static/js/bootstrap-button.js"></script>
-			<script type="text/javascript" src="static/js/bootstrap-modal.js"></script>
-			<script type="text/javascript" src="static/js/bootstrap-transition.js"></script>
-			<script type="text/javascript" src="static/js/jquery-2.1.0.min.js"></script>
+			<?php
+				include "common\header.php";
+			?>
 			<script type="text/javascript" src="static/ckeditor/ckeditor.js"></script>
 			
 			<script>				
@@ -55,25 +47,19 @@
 			</div>
 			<div id="content" class="row">
 				<div id="sidebar" class="span2">
-					<ul id="sidebar-list" class="nav nav-list">
+					<ul id="sidebar-list" class="nav nav-list row-padded">
 						<li>
-							<p>
 							<form id="create-form" method="get" action="post.php">
 							<a href="post.php?type=create" class="btn btn-primary btn-block">New Post</a>
 							</form>
-							</p>
 						</li>
 						<li>
-							<p>
 							<input type="button btn-primary btn-block" value="Post List" onClick="javascript:showPosts();" class="btn btn-primary" id="edit-posts">
-							</p>
 						</li>
 						<li>
-							<p>
 							<form id="logout-form" action="dashboard.php" method="post"> 
 								<button class="btn btn-primary btn-block" type="submit" name="logout">Log Out</button>
 							</form>
-							</p>
 						</li>
 					</ul>
 				</div>
@@ -82,7 +68,7 @@
 						<?php echo "Hello, ".$_SESSION['username']."."; ?>
 					</p>
 					<p>
-						<table id="postsTable" class="table table-bordered" style="display:none;">
+						<table id="postsTable" class="table table-striped" style="display:none;">
 							<tr>
 								<td><strong>Post Title</strong></td>
 								<td><strong>Date Posted</strong></td>
