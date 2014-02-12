@@ -27,6 +27,7 @@
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<link href="static/css/bootstrap.min.css" rel="stylesheet">
 			<link href="static/css/bootstrap-responsive.min.css" rel="stylesheet">
+			<link href="static/css/style.css" rel="stylesheet">
 			<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
 			<script type="text/javascript" src="static/js/bootstrap-button.js"></script>
 			<script type="text/javascript" src="static/js/bootstrap-modal.js"></script>
@@ -52,26 +53,49 @@
 				  </ul>
 				</div> 
 			</div>
-			<!-- Text editor -->
-			<p>
-				<form id="create-form" method="get" action="post.php">
-					<a href="post.php?type=create" class="btn btn-primary">New Post</a>
-				</form>
-			</p>
-			<!-- List of posts by user -->
-			<a href="javascript:showPosts();" class="btn btn-primary" id="edit-posts">Edit/Delete Posts</a>
-			<p><table id="postsTable" style="display:none;">
-				<tr>
-					<td>Post Title</td><td>Date Posted</td>
-				</tr>
-				<?php
-					listPosts($db_found);
-				?>
-			</table></p>
-			<!-- Logout button -->
-			<form id="logout-form" action="dashboard.php" method="post"> 
-				<button class="btn btn-primary" type="submit" name="logout">Log Out</button>
-			</form>
+			<div id="content" class="row">
+				<div id="sidebar" class="span2">
+					<ul id="sidebar-list" class="nav nav-list">
+						<li>
+							<p>
+							<form id="create-form" method="get" action="post.php">
+							<a href="post.php?type=create" class="btn btn-primary btn-block">New Post</a>
+							</form>
+							</p>
+						</li>
+						<li>
+							<p>
+							<input type="button btn-primary btn-block" value="Post List" onClick="javascript:showPosts();" class="btn btn-primary" id="edit-posts">
+							</p>
+						</li>
+						<li>
+							<p>
+							<form id="logout-form" action="dashboard.php" method="post"> 
+								<button class="btn btn-primary btn-block" type="submit" name="logout">Log Out</button>
+							</form>
+							</p>
+						</li>
+					</ul>
+				</div>
+				<div id="main" class="span6">
+					<p>
+						<?php echo "Hello, ".$_SESSION['username']."."; ?>
+					</p>
+					<p>
+						<table id="postsTable" class="table table-bordered" style="display:none;">
+							<tr>
+								<td><strong>Post Title</strong></td>
+								<td><strong>Date Posted</strong></td>
+								<td><strong>Edit</strong></td>
+								<td><strong>Delete</strong></td>
+							</tr>
+							<?php
+								listPosts($db_found);
+							?>
+						</table>
+					</p>
+				</div>
+			</div>
 		</div>
 		</body>
 	</html>
