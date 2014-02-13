@@ -8,11 +8,9 @@
 		
 		if(!$db_found){
 			$errorMessage = "Can't connect to the database.";	
-			exit();
 		}
 		elseif(strlen($uname) > 20 || strlen($pwordraw) > 20){
 			$errorMessage = "Input too large. Username and password are a maximum of 20 characters each.";
-			exit();
 		}
 		else {
 			// Check if the login details are correct
@@ -28,7 +26,7 @@
 			$num_rows = sizeof($result);
 
 			if($num_rows > 0){
-				//mysqli_close($db_found);
+				mysqli_close($db_found);
 				
 				session_start();
 				$_SESSION["login"] = "1";
@@ -38,7 +36,6 @@
 			}
 			else {
 				$errorMessage = "Invalid login. Please try again.";
-				exit();
 			}
 		}
 		
@@ -53,11 +50,9 @@
 						
 		if(!$db_found){
 			$errorMessage = "Can't connect to the database.";	
-			exit();
 		}
 		elseif(strlen($uname) > 20 || strlen($pwordraw) > 20 || strlen($email) > 30){
 			$errorMessage = "Input too large. Username and password are a maximum of 20 characters each while email is a maximum of 30 characters.";
-			exit();
 		}
 		else {
 			// Check that the username isn't taken yet
@@ -72,7 +67,6 @@
 
 			if ($num_rows > 0) {
 				$errorMessage = "Username already taken. Please try again.";
-				exit();
 			}
 			else {
 				// Complete signup
@@ -81,7 +75,7 @@
 				mysqli_stmt_bind_param($stmt,"sss",$uname,$email,$pword);
 				mysqli_stmt_execute($stmt);
 				mysqli_stmt_close($stmt);
-				//mysqli_close($db_found);
+				mysqli_close($db_found);
 				
 				session_start();
 				$_SESSION['username'] = $uname;
@@ -97,6 +91,6 @@
 	function logOut(){
 		session_start();
 		session_destroy();
-		header("Location: index.php");
+		header("Location: ../index.php");
 	}
 ?>
