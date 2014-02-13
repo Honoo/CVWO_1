@@ -1,15 +1,15 @@
 <?php
 	session_start();
 	
-	if(!(isset($_SESSION["login"]) && $_SESSION["login"] != '')){
+	if(!isset($_SESSION["login"])){
 		header("Location: login.php");
 	}	
 	
-	require_once 'includes\blog.php';
-	require_once 'includes\config.php';
+	require_once '../includes/blog.php';
+	require_once '../includes/config.php';
 	
 	$db_found = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
-	$post = '';
+	$post = array('','');
 	
 	if(isset($_GET['type'])){
 		if($_GET['type'] == "create"){
@@ -37,9 +37,9 @@
 	<html lang="en">
 		<head>
 			<?php
-				include "common\header.php";
+				include "common/header.php";
 			?>
-			<script type="text/javascript" src="static/ckeditor/ckeditor.js"></script>
+			<script type="text/javascript" src="../static/ckeditor/ckeditor.js"></script>
 			<title>Post Editor</title>
 		</head>
 		<body>
@@ -47,7 +47,7 @@
 				<div class="navbar">
 					<div class="tabbable">
 					  <ul class="nav nav-tabs">
-						<li><a href="index.php">Home</a></li>
+						<li><a href="../index.php">Home</a></li>
 						<li><a href="dashboard.php">Dashboard</a></li>
 					  </ul>
 					</div> 

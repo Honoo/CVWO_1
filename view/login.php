@@ -1,12 +1,12 @@
 <?php
 	session_start();
 
-	if(isset($_SESSION["login"]) && $_SESSION["login"] != ''){
+	if(isset($_SESSION["login"])){
 		header("Location: dashboard.php");
 	}
 	
-	require_once 'includes\user.php';
-	require_once 'includes\config.php';
+	require_once '../includes/user.php';
+	require_once '../includes/config.php';
 	
 	$db_found = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
 	$errorMessage = '';
@@ -24,7 +24,7 @@
 	<html lang="en">
 		<head>
 			<?php
-				include "common\header.php";
+				include "common/header.php";
 			?>
 			<script type="text/javascript" src="static/js/jquery.md5.js"></script>
 			<title>Login/Signup</title>
@@ -34,7 +34,7 @@
 				<div class="navbar">
 					<div class="tabbable">
 					  <ul class="nav nav-tabs">
-						<li><a href="index.php">Home</a></li>
+						<li><a href="../index.php">Home</a></li>
 						<li class="active"><a href="login.php">Login/Signup</a></li>
 					  </ul>
 					</div> 
