@@ -9,7 +9,7 @@
 	require_once 'includes\config.php';
 	
 	$db_found = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
-	$postContent = '';
+	$post = '';
 	
 	if(isset($_GET['type'])){
 		if($_GET['type'] == "create"){
@@ -18,7 +18,7 @@
 		elseif($_GET['type'] == "edit"){
 			$_SESSION['type'] = "edit";
 			$_SESSION['id'] = $_GET['id'];
-			$postContent = retrievePost($db_found);
+			$post = retrievePost($db_found);
 		}
 	}
 	
@@ -55,11 +55,11 @@
 				<!-- text editor -->
 				<form id="post-form" method="post" action="post.php">
 					<p>
-						<input type="text" name="title" value="Title" maxlength="50"/>
+						<input type="text" name="title" value="<?php echo $post[1]; ?>" maxlength="50"/>
 					</p>
 					<p>
 						<textarea id="editor1" name="editor1">&lt;p&gt;
-						<?php echo $postContent; ?>
+						<?php echo $post[0]; ?>
 						&lt;/p&gt;</textarea>
 						<script type="text/javascript">
 							CKEDITOR.replace( 'editor1' );

@@ -74,15 +74,17 @@
 	function retrievePost($db_found){
 		// Displays a post in the text editor to be edited
 			
-		$SQL = "SELECT content FROM posts WHERE postID = ?;";
+		$SQL = "SELECT content, title FROM posts WHERE postID = ?;";
 		$stmt = mysqli_prepare($db_found,$SQL);
 		mysqli_stmt_bind_param($stmt,"i",$_GET['id']);
 		mysqli_stmt_execute($stmt);
-		mysqli_stmt_bind_result($stmt,$postContent);
+		mysqli_stmt_bind_result($stmt,$postContent,$title);
 		mysqli_stmt_fetch($stmt);
 		mysqli_stmt_close($stmt);
 		
-		return $postContent;
+		$results = array($postContent,$title);
+		
+		return $results;
 	}
 	
 	function editPost($db_found){
