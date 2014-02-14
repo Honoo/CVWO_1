@@ -26,7 +26,7 @@
 			<?php
 				include "common/header.php";
 			?>
-			<script type="text/javascript" src="static/js/jquery.md5.js"></script>
+			<script type="text/javascript" src="../static/js/jquery.md5.js"></script>
 			<title>Login/Signup</title>
 		</head>
 		<body>
@@ -70,6 +70,22 @@
 									<button class="btn btn-primary" type="submit" name="login">Log In</button>
 								</div>
 							</form>
+							<script type="text/javascript">
+								$(function()
+								{
+									$("#login-form").submit(function(event) {										
+										// Get the values from the form
+										var $form = $(this),
+											username = $form.find("input[name='username']").val(),
+											password = $form.find("input[name='password']").val(),
+											url = $form.attr("action");
+											
+										// Hash and replace the password
+										var hashValue = $.md5(username+password);
+										$("#login-form input[name='password']").val(hashValue);
+									});
+								});
+							</script>
 						</div>
 						<!-- signup box -->
 						<div id="signup-container" class="span6">
@@ -96,6 +112,23 @@
 									<button class="btn btn-primary create-button" type="submit" name="signup">Create Account</button>
 								</div>
 							</form>
+							<script type="text/javascript">
+								$(function()
+								{
+									$("#signup-form").submit(function(event) {
+										// Get some values from elements on the page:
+										var $form = $(this),
+											username = $form.find("input[name='username']").val(),
+											email = $form.find("input[name='email']").val(),
+											password = $form.find("input[name='password']").val(),
+											url = $form.attr("action");
+											
+										// Hash the username and password
+										var hashValue = $.md5(username+password);
+										$("#signup-form input[name='password']").val(hashValue);
+									});
+								});
+							</script>
 						</div>
 					</div>
 				</div>

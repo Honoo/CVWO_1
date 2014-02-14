@@ -1,15 +1,14 @@
 <?php
 	// This file stores functions related to user actions.
-	
+		
 	function validateLogin($db_found){
 		$uname = mysqli_real_escape_string($db_found, $_POST['username']);
-		$pwordraw = mysqli_real_escape_string($db_found, $_POST['password']);
-		$pword = md5($uname.$pwordraw);
+		$pword = mysqli_real_escape_string($db_found, $_POST['password']);
 		
 		if(!$db_found){
 			$errorMessage = "Can't connect to the database.";	
 		}
-		elseif(strlen($uname) > 20 || strlen($pwordraw) > 20){
+		elseif(strlen($uname) > 20){
 			$errorMessage = "Input too large. Username and password are a maximum of 20 characters each.";
 		}
 		else {
@@ -44,14 +43,13 @@
 	
 	function signUp($db_found){
 		$uname = mysqli_real_escape_string($db_found, $_POST['username']);
-		$pwordraw = mysqli_real_escape_string($db_found, $_POST['password']);
-		$pword = md5($uname.$pwordraw);
+		$pword = mysqli_real_escape_string($db_found, $_POST['password']);
 		$email = mysqli_real_escape_string($db_found, $_POST['email']);
 						
 		if(!$db_found){
 			$errorMessage = "Can't connect to the database.";	
 		}
-		elseif(strlen($uname) > 20 || strlen($pwordraw) > 20 || strlen($email) > 30){
+		elseif(strlen($uname) > 20 || strlen($email) > 30){
 			$errorMessage = "Input too large. Username and password are a maximum of 20 characters each while email is a maximum of 30 characters.";
 		}
 		else {
