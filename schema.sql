@@ -3,7 +3,7 @@ CREATE TABLE users (
   username VARCHAR(20),
   email VARCHAR(30),
   password VARCHAR(255),
-  PRIMARY KEY  (`userID`)
+  PRIMARY KEY  (userID)
 );
 
 CREATE TABLE `posts` (
@@ -12,7 +12,7 @@ CREATE TABLE `posts` (
   title VARCHAR(255),
   content TEXT,
   userID INT,
-  PRIMARY KEY  (`postID`)
+  PRIMARY KEY  (postID)
 );
 
 ALTER TABLE posts ADD CONSTRAINT posts_fk1 FOREIGN KEY (userID) REFERENCES Users(userID);
