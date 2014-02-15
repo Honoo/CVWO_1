@@ -6,7 +6,7 @@ CREATE TABLE users (
   PRIMARY KEY  (userID)
 );
 
-CREATE TABLE `posts` (
+CREATE TABLE posts (
   postID INT NOT NULL AUTO_INCREMENT,
   date_created TIMESTAMP,
   title VARCHAR(255),
